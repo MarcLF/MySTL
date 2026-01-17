@@ -1,0 +1,10 @@
+---
+Language: Cpp
+BasedOnStyle: Mozilla
+
+IndentWidth: 4
+ReflowComments: true
+AlignTrailingComments: true
+AlwaysBreakAfterDefinitionReturnType: None
+AlwaysBreakAfterReturnType: None
+AllowShortFunctionsOnASingleLine: All
