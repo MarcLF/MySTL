@@ -14,6 +14,8 @@ if(NOT CMAKE_CXX_MODULE_STD)
     message(FATAL_ERROR "Your CMake or Compiler version does not support 'import std'.")
 endif()
 
+add_compile_options(/reference "${CMAKE_BINARY_DIR}/CMakeFiles/__cmake_cxx23.dir/std.ifc")
+
 # Orchestration
 add_subdirectory(src)
 add_subdirectory(app)

@@ -69,4 +69,51 @@ BOOST_AUTO_TEST_CASE(test_vector_clear)
     BOOST_TEST(v[0] == 100);
 }
 
+BOOST_AUTO_TEST_CASE(test_vector_at_access)
+{
+    mystl::vector<int> v;
+    v.push_back(100);
+    v.push_back(200);
+
+    // Test valid access
+    BOOST_CHECK_EQUAL(v.at(0), 100);
+    BOOST_CHECK_EQUAL(v.at(1), 200);
+
+    // Test out-of-bounds access (should throw)
+    BOOST_CHECK_THROW(v.at(2), std::out_of_range);
+    BOOST_CHECK_THROW(v.at(999), std::out_of_range);
+
+    // Test const version
+    const mystl::vector<int>& const_v = v;
+    BOOST_CHECK_EQUAL(const_v.at(0), 100);
+}
+
+BOOST_AUTO_TEST_CASE(test_vector_iterators)
+{
+    mystl::vector<int> v;
+    v.push_back(10);
+    v.push_back(20);
+    v.push_back(30);
+
+    // Test range-based for loop (uses begin/end under the hood)
+    int sum = 0;
+    for (int x : v) {
+        sum += x;
+    }
+    BOOST_CHECK_EQUAL(sum, 60);
+
+    // Test iterator arithmetic
+    auto it = v.begin();
+    BOOST_CHECK_EQUAL(*it, 10);
+    ++it;
+    BOOST_CHECK_EQUAL(*it, 20);
+
+    // Test end() boundary
+    BOOST_CHECK(v.begin() + v.size() == v.end());
+
+    // Test modification through iterator
+    *v.begin() = 50;
+    BOOST_CHECK_EQUAL(v[0], 50);
+}
+
 BOOST_AUTO_TEST_SUITE_END()

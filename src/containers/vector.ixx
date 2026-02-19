@@ -64,6 +64,22 @@ class vector
      */
     const T& operator[](size_type index) const { return data_[index]; }
 
+    reference at(size_type index)
+    {
+        if (index >= size_) {
+            throw std::out_of_range("mystl::vector::at() - index out of range");
+        }
+        return data_[index];
+    }
+
+    const T& at(size_type index) const
+    {
+        if (index >= size_) {
+            throw std::out_of_range("mystl::vector::at() - index out of range");
+        }
+        return data_[index];
+    }
+
     vector& operator=(const vector& other)
     {
         if (this != &other) {
@@ -184,6 +200,15 @@ class vector
         }
         size_ = 0;
     }
+
+    // Iterators
+    using iterator = T*;
+    using const_iterator = const T*;
+
+    [[nodiscard]] iterator begin() noexcept { return data_; }
+    [[nodiscard]] iterator end() noexcept { return data_ + size_; }
+    [[nodiscard]] const_iterator begin() const noexcept { return data_; }
+    [[nodiscard]] const_iterator end() const noexcept { return data_ + size_; }
 
   private:
     // Pointer to the first element in the raw buffer
